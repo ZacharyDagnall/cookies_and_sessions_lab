@@ -1,0 +1,23 @@
+<h1> Welcome to this crazy store lol </h1>
+<h2> Products: </h2>
+<ul> 
+    <% @products.each do |product| %>
+        <li> <%= product.name %>: $<%= product.price%> </li>
+    <% end %>
+</ul>
+
+<% if cart.any? %>
+    <h3> Cart: </h3>
+    <ul> 
+        <% cart.each do |prod,arr| %> <%# |product_name, array [price, quantity]| %>
+            <li> <%= prod %>: $<%= arr[0]%>. Number in cart: <%= arr[1] %>. Total: <%= arr[0]*arr[1] %></li>
+        <% end %>
+    </ul>
+    <h4> The current total for your cart: <%= @cart_total %> </h4>
+<% end %>
+
+<h3> Add an item to your cart! </h3>
+<%= form_tag add_path do %>
+    <%= text_field_tag :product_name %>
+    <%= submit_tag "add to cart" %>
+<% end %>
